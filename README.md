@@ -1,4 +1,4 @@
-# atlas
+# atlas v1.0.1
 
 Atlas is an website scanner, which
 scans for:
