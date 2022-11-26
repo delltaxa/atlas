@@ -47,3 +47,8 @@ That's it!
 
 Linux: Yes
 Windows: IDK Just test it
+
+
+# INFO
+
+This tool is not async yet (which means it's slow)
