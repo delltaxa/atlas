@@ -32,6 +32,12 @@ git clone https://github.com/delltaxa/atlas.git; cd atlas/
 # Usage
 
 ```
+python3 main.py https://www.example.com/
+```
+
+or (If it's in /bin + named atlas + chmoded + and the busting.txt is in your directory)
+
+```
 atlas https://www.example.com/
 ```
 
