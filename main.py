@@ -3,18 +3,21 @@
 import datetime
 from colorama import Fore
 
-version = "1.0.1"
+version = "1.0.2-A"
 site = "https://atlas.tool/"
 text = f"""{Fore.BLUE}
- _____ _____ __    _____ _____ 
-|  _  |_   _|  |  |  _  |   __| {Fore.MAGENTA}Version {Fore.YELLOW}{version}{Fore.BLUE}
-|     | | | |  |__|     |__   | {Fore.WHITE}{site}{Fore.BLUE}
-|__|__| |_| |_____|__|__|_____|
+    _     
+   /|\      _____ _____ __    _____ _____ 
+  / | \    |  _  |_   _|  |  |  _  |   __| {Fore.MAGENTA}Version {Fore.YELLOW}{version}{Fore.BLUE}
+ / /\__\   |     | | | |  |__|     |__   | {Fore.WHITE}{site}{Fore.BLUE}
+/_/__|__\  |__|__| |_| |_____|__|__|_____| {Fore.WHITE}The {Fore.BLUE}Async{Fore.WHITE} Version
 
 {Fore.WHITE}"""
 
 def line(len, ch):
     return ch*len
+
+import asyncio
 
 import json
 import socket
@@ -23,6 +26,8 @@ import urllib
 from urllib.parse import urlparse, urljoin
 from urllib.request import urlopen
 class atlas:
+    miss_configured = []
+
     dev_ports = [
         8080, 8081, 4434,
 	    5000, 3000, 3001,
@@ -30,15 +35,11 @@ class atlas:
 	    5001, 8443
     ]
 
-    miss_configured = []
-
-    def loadmisscfg():
+    def load_miss_configured():
         f = open('busting.txt')
         data = json.load(f)
         f.close()
         atlas.miss_configured = data
-
-    # +=====+
 
     def port_open(addr, port):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -69,7 +70,7 @@ class atlas:
     def dev_links(url):
         results = []
         host = atlas.get_domain(url=url)
-        addr = atlas.host_to_ip(host=host)
+        addr = atlas.host2ip(host=host)
         for port in atlas.dev_ports:
             open = atlas.port_open(addr, port)
             if open:
@@ -77,7 +78,6 @@ class atlas:
 
         return results
 
-    # +=====+
     def is_gruzifix(url):
         try:
             f = urlopen(urljoin(url, "/gruzifix.atlas"))
@@ -87,105 +87,58 @@ class atlas:
         except urllib.error.HTTPError:
             return False
 
-    def get_miss_configured(url, should_len):
+    miss_conf_results = []
+    async def handle_miss(url, should_len, gruzifix, x):
+        critlevel = []
+        paths     = []
+        rootpaths = []
+
+        try: critlevel = x["critLevel"]
+        except: pass
+
+        try: paths = x["paths"]
+        except: pass
+
+        try: rootpaths = x["rootPaths"]
+        except: pass
+
+        critcolor = Fore.RED
+        
+        if critlevel == "1":
+            critcolor = Fore.GREEN
+        elif critlevel == "2":
+            critcolor = Fore.YELLOW
+
+        allpaths = paths+rootpaths
+        
+        for path in allpaths:
+            try:
+                f = urlopen(urljoin(url, path))
+                
+                fg_color = Fore.GREEN
+            
+                if gruzifix == True:
+                    fg_color = Fore.YELLOW
+
+                if f.code == 200 and gruzifix:
+                    continue
+
+                if f.code != 404:
+                    atlas.miss_conf_results.append(path + " " + line(should_len - path.__len__() - 1 - "[00:00:00] [INFO]  ".__len__() - (str(f.code).__len__() + 2), " ") + critcolor + f"{critlevel} " + fg_color + str(f.code) + Fore.WHITE)
+            except urllib.error.HTTPError:
+                pass
+        
+        return "atlas"
+
+    async def get_miss_configured(url, should_len):
         results = []
 
         gruzifix = atlas.is_gruzifix(url)
 
-        for x in atlas.miss_configured:
-            title = []
-            tags = []
-            filterstatuscodes = []
-            detectresponses = []
-            critlevel = []
-            paths = []
-            rootpaths = []
-          
-            try:
-                critlevel = x["critLevel"]
-            except:
-                pass
+        f = await asyncio.gather(*[atlas.handle_miss(url, should_len, gruzifix, x) for x in atlas.miss_configured])
 
-            try:
-                detectresponses = x["detectResponses"]
-            except:
-                pass
+        results = atlas.miss_conf_results
 
-            try:
-                filterstatuscodes = x["filterStatusCodes"]
-            except:
-                pass
-
-            try:
-                tags = x["tags"]
-            except:
-                pass
-
-            try:
-                title = x["title"]
-            except:
-                pass
-
-            try:
-                paths = x["paths"]
-            except:
-                pass
-
-            try:
-                rootpaths = x["rootPaths"]
-            except:
-                pass
-
-            critcolor = ""
-            if critlevel == "1":
-                critcolor = Fore.GREEN
-            elif critlevel == "2":
-                critcolor = Fore.YELLOW
-            else:
-                critcolor = Fore.RED
-
-            allpaths = paths+rootpaths
-            
-            for path in allpaths:
-                try:
-                    f = urlopen(urljoin(url, path))
-
-                    content = requests.get(urljoin(url, path), allow_redirects=False).content
-                    content = content.decode("utf-8")
-
-                    fg_color = Fore.GREEN
-                
-                    if gruzifix == True:
-                        fg_color = Fore.YELLOW
-
-                    if f.code == 200 and gruzifix:
-                        continue
-
-                    if f.code != 404:
-                        results.append(path + " " + line(should_len - path.__len__() - 1 - "[00:00:00] [INFO]  ".__len__() - (str(f.code).__len__() + 2), " ") + critcolor + f"{critlevel} " + fg_color + str(f.code) + Fore.WHITE)
-                except urllib.error.HTTPError:
-                    pass
-        
-
-        # for miss_cfg in atlas.miss_configured:
-        #     try:
-        #         f = urlopen(urljoin(url, miss_cfg))
-
-        #         content = requests.get(urljoin(url, miss_cfg), allow_redirects=False).content
-        #         content = content.decode("utf-8")
-
-        #         fg_color = Fore.GREEN
-        #        
-        #         if gruzifix == True:
-        #             fg_color = Fore.YELLOW
-
-        #         if f.code == 200 and gruzifix:
-        #             continue
-
-        #         if f.code != 404:
-        #             results.append(miss_cfg + " " + line(should_len - miss_cfg.__len__() - 1 - "[00:00:00] [INFO]  ".__len__() - str(f.code).__len__(), " ") + fg_color + str(f.code) + Fore.WHITE)
-        #     except urllib.error.HTTPError:
-        #         pass
         return results
 
     def get_robots(url):
@@ -222,7 +175,7 @@ class atlas:
     def get_domain(url):
         return urlparse(url).netloc
     
-    def host_to_ip(host):
+    def host2ip(host):
         return socket.gethostbyname(host)
 
     def get_server(url):
@@ -236,8 +189,8 @@ class atlas:
 def ctime():
     return datetime.datetime.today().strftime('%H:%M:%S')
 
-def makescan(url):
-    atlas.loadmisscfg()
+async def makescan(url):
+    atlas.load_miss_configured()
 
     liner = line((f"[00:00:00] [EVENT] Getting info about ({url})").__len__(), '-')
 
@@ -247,15 +200,11 @@ def makescan(url):
         paths = []
         rootpaths = []
         
-        try:
-            paths = x["paths"]
-        except:
-            pass
-
-        try:
-            rootpaths = x["rootPaths"]
-        except:
-            pass
+        try: paths = x["paths"]
+        except: pass
+        
+        try: rootpaths = x["rootPaths"]
+        except: pass
 
         allpaths = paths+rootpaths
         
@@ -272,13 +221,13 @@ def makescan(url):
 
     print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.GREEN}INFO{Fore.WHITE}]  DOMAIN.: {atlas.get_domain(url)}")
     print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.GREEN}INFO{Fore.WHITE}]  SERVER.: {atlas.get_server(url)}")
-    print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.GREEN}INFO{Fore.WHITE}]  ADDRESS: {atlas.host_to_ip(atlas.get_domain(url))}")
+    print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.GREEN}INFO{Fore.WHITE}]  ADDRESS: {atlas.host2ip(atlas.get_domain(url))}")
    
     print(liner)
     print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.BLUE}EVENT{Fore.WHITE}] Checking for miss-configured files")
     print(liner)
 
-    misscfg = atlas.get_miss_configured(url, liner.__len__())
+    misscfg = await atlas.get_miss_configured(url, liner.__len__())
     for file in misscfg:
         print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.GREEN}INFO{Fore.WHITE}]  {file}")
     if misscfg.__len__() == 0:
@@ -318,21 +267,20 @@ def makescan(url):
 
 
 import sys
-def main():
+async def main():
     print(text)
 
     if sys.argv.__len__() < 2:
         print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.RED}ERROR{Fore.WHITE}] {Fore.WHITE} No url specified")
         exit()
 
-    makescan(sys.argv[1])
+    await makescan(sys.argv[1])
 
 if __name__ == "__main__":
     try:
-        main()
+        asyncio.run(main())
     except KeyboardInterrupt:
         print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.RED}ERROR{Fore.WHITE}] {Fore.WHITE} KeyboardInterrupt")
-        exit()
     except requests.exceptions.ConnectionError:
         print(f"[{Fore.CYAN}{ctime()}{Fore.WHITE}] [{Fore.RED}ERROR{Fore.WHITE}] {Fore.WHITE} HostNotFound")
-        exit()
+    exit()
