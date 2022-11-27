@@ -2,7 +2,7 @@
 
 <img style="align: left;" width="200" height="200" src="https://user-images.githubusercontent.com/114283067/204154568-78f2db33-1d5c-40bf-acc0-1d59292802b6.png" >
 Atlas is a website scanner, which scans the following things:
-<br/>
+
 * Basic Host Info <br/>
 * Miss-configured Files <br/>
 * Dev Ports <br/>
