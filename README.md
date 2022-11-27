@@ -1,16 +1,21 @@
-# atlas v1.0.1
+# atlas v1.0.2-ASYNC
 
 Atlas is an website scanner, which
 scans for:
 
-~ Basic Host Info
-~ Miss-configured Files
-~ Dev Ports
-~ Robots.txt
+*+* Basic Host Info
+*+* Miss-configured Files
+*+* Dev Ports
+*+* Robots.txt
 
 Thanks to (Leetcore) https://github.com/Leetcore
 and his project ninja-hacker-cat
 where I have the busting.txt from!
+
+# 1.0.1 ==> 1.0.2-ASYNC
+*Update INFO*:
+
+Atlas is finally async!
 
 # Installation
 
@@ -45,10 +50,5 @@ That's it!
 
 # Supports
 
-Linux: Yes
-Windows: IDK Just test it
-
-
-# INFO
-
-This tool is not async yet (which means it's slow)
+Linux:   Yes
+Windows: idk
