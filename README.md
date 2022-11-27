@@ -1,6 +1,6 @@
 # atlas v1.0.2-ASYNC
 
-![atlas (1)](https://user-images.githubusercontent.com/114283067/204154531-172eb44b-7a78-43aa-8dd1-b2a4a4208f21.png)
+![atlas200](https://user-images.githubusercontent.com/114283067/204154568-78f2db33-1d5c-40bf-acc0-1d59292802b6.png)
 
 
 Atlas is a website scanner, which scans the following things:
