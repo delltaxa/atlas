@@ -3,10 +3,10 @@
 Atlas is an website scanner, which
 scans for:
 
-*+* Basic Host Info
-*+* Miss-configured Files
-*+* Dev Ports
-*+* Robots.txt
+Basic Host Info <br/>
+Miss-configured Files <br/>
+Dev Ports <br/>
+Robots.txt <br/>
 
 Thanks to (Leetcore) https://github.com/Leetcore
 and his project ninja-hacker-cat
@@ -50,5 +50,5 @@ That's it!
 
 # Supports
 
-Linux:   Yes
+Linux:   Yes <br/>
 Windows: idk
