@@ -28,9 +28,14 @@ Direct in to the Directory
 cd atlas/
 ```
 
+Install packages
+```
+pip install -r requirements.txt
+```
+
 One-Liner
 ```
-git clone https://github.com/delltaxa/atlas.git; cd atlas/
+git clone https://github.com/delltaxa/atlas.git; cd atlas/; pip install -r requirements.txt
 ```
 
 # Usage
