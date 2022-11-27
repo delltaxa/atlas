@@ -43,6 +43,11 @@ python3 main.py https://www.example.com/
 ```
 ---
 
+# Showcase
+
+![abc](https://user-images.githubusercontent.com/114283067/204155168-59c176c1-e5ec-4781-b9d3-14dee0ae8a40.png)
+
+---
 # Thanks to
 
 Thanks to (Leetcore) https://github.com/Leetcore
