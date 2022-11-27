@@ -1,12 +1,11 @@
 # atlas v1.0.2-ASYNC
 
-Atlas is an website scanner, which
-scans for:
+Atlas is an website scanner, which scans the following things:
 
-Basic Host Info <br/>
-Miss-configured Files <br/>
-Dev Ports <br/>
-Robots.txt <br/>
+* Basic Host Info <br/>
+* Miss-configured Files <br/>
+* Dev Ports <br/>
+* Robots.txt <br/>
 
 Thanks to (Leetcore) https://github.com/Leetcore
 and his project ninja-hacker-cat
