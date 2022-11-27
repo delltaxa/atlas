@@ -8,11 +8,6 @@ Atlas is a website scanner, which scans the following things:
 * Dev Ports <br/>
 * Robots.txt <br/>
 
-<br/><br/>
-Thanks to (Leetcore) https://github.com/Leetcore
-and his project ninja-hacker-cat
-where I have the busting.txt from!
-
 # 1.0.1 ==> 1.0.2-ASYNC
 
 * Atlas is finally async
@@ -46,6 +41,13 @@ git clone https://github.com/delltaxa/atlas.git; cd atlas/; pip install -r requi
 python3 main.py https://www.example.com/
 ```
 ---
+
+# Thanks to
+
+Thanks to (Leetcore) https://github.com/Leetcore
+and his project ninja-hacker-cat
+where I have the busting.txt from!
+
 # Supports
 
 Linux:   Yes <br/>
