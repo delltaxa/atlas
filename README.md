@@ -4,12 +4,10 @@
 
 Atlas is a website scanner, which scans the following things:
 
-<p style="align: right;" >
 * Basic Host Info <br/>
 * Miss-configured Files <br/>
 * Dev Ports <br/>
 * Robots.txt <br/>
-</p>
 
 Thanks to (Leetcore) https://github.com/Leetcore
 and his project ninja-hacker-cat
