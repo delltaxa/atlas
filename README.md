@@ -17,7 +17,7 @@ where I have the busting.txt from!
 
 * Atlas is finally async
 * I also removed some old code which made the scanner like 2x slower
-
+---
 # Installation
 
 Clone the repo
@@ -39,13 +39,13 @@ One-Liner
 ```
 git clone https://github.com/delltaxa/atlas.git; cd atlas/; pip install -r requirements.txt
 ```
-
+---
 # Usage
 
 ```
 python3 main.py https://www.example.com/
 ```
-
+---
 # Supports
 
 Linux:   Yes <br/>
