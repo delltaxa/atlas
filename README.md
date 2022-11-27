@@ -1,6 +1,6 @@
 # atlas v1.0.2-ASYNC
 
-Atlas is an website scanner, which scans the following things:
+Atlas is a website scanner, which scans the following things:
 
 * Basic Host Info <br/>
 * Miss-configured Files <br/>
@@ -38,8 +38,6 @@ git clone https://github.com/delltaxa/atlas.git; cd atlas/
 ```
 python3 main.py https://www.example.com/
 ```
-
-That's it!
 
 # Supports
 
