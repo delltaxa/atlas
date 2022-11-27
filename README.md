@@ -13,9 +13,9 @@ and his project ninja-hacker-cat
 where I have the busting.txt from!
 
 # 1.0.1 ==> 1.0.2-ASYNC
-*Update INFO*:
 
-Atlas is finally async!
+* Atlas is finally async
+* I also removed some old code which made the scanner like 2x slower
 
 # Installation
 
