@@ -12,7 +12,7 @@ Atlas is a website scanner, which scans the following things:
 * Miss-configured Files <br/>
 * Dev Ports <br/>
 * Robots.txt <br/>
-<br/><br/>
+<br/><br/><br/>
 ---
 # 1.0.1 ==> 1.0.2-ASYNC
 
