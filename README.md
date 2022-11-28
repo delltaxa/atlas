@@ -2,8 +2,11 @@
 
 # atlas v1.0.2-ASYNC
 
-<img style="align: left;" align="left" width="200" height="200" src="https://user-images.githubusercontent.com/114283067/204316998-72e1c196-5328-4489-86ea-037ab17bc896.png" >
+
 Atlas is a website scanner, which scans the following things:
+
+
+<img style="align: left;" align="left" width="200" height="200" src="https://user-images.githubusercontent.com/114283067/204316998-72e1c196-5328-4489-86ea-037ab17bc896.png" >
 
 * Basic Host Info <br/>
 * Miss-configured Files <br/>
